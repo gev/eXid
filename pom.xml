@@ -48,4 +48,16 @@
 			<url>https://raw.github.com/eXist-db/mvn-repo/master/</url>
 		</repository>
 	</repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>mvn-repo</id>
+            <url>file:../../mvn-repo/raw/master/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshot-mvn-repo</id>
+            <url>file:../../mvn-repo/raw/master/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>
