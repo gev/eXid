@@ -19,6 +19,8 @@
  */
 package org.exist.exid;
 
+import org.exist.xquery.value.Item;
+
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.UUID;
@@ -44,8 +46,7 @@ public class eXid {
         return translate(n.divide(l), abc[((int) i)] + s);
     }
 
-    public static String get() {
-        UUID id = UUID.randomUUID();
+    private static String uuid(UUID id) {
         ByteBuffer b = ByteBuffer.allocate(16);
         b.putLong(id.getMostSignificantBits());
         b.putLong(id.getLeastSignificantBits());
@@ -53,8 +54,12 @@ public class eXid {
         return 'x' + translate(a, "");
     }
 
-    public static void main(String[] arg) {
-        System.out.println(get());
+    public static String get() {
+        return uuid(UUID.randomUUID());
+    }
+
+    public static String get(String s) {
+        return uuid(UUID.nameUUIDFromBytes(s.getBytes()));
     }
 
 }

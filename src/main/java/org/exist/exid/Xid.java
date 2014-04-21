@@ -21,10 +21,7 @@ package org.exist.exid;
 
 import org.apache.log4j.Logger;
 import org.exist.dom.QName;
-import org.exist.xquery.BasicFunction;
-import org.exist.xquery.FunctionSignature;
-import org.exist.xquery.XPathException;
-import org.exist.xquery.XQueryContext;
+import org.exist.xquery.*;
 import org.exist.xquery.value.*;
 
 import static org.exist.exid.Module.*;
@@ -39,13 +36,23 @@ public class Xid extends BasicFunction {
 
     private final static Logger logger = Logger.getLogger(Xid.class);
 
-    public final static FunctionSignature signature =
+    public final static FunctionSignature[] signature = {
             new FunctionSignature(
                     new QName("xid", NAMESPACE_URI, PREFIX),
                     "generate random id based on the uuid.",
                     new SequenceType[] {},
                     new FunctionReturnSequenceType(STRING, EXACTLY_ONE, "")
-            );
+            ),
+            new FunctionSignature(
+                    new QName("xid", NAMESPACE_URI, PREFIX),
+                    "generate random id based on the uuid.",
+                    new SequenceType[] {
+                            new FunctionParameterSequenceType("id", Type.STRING, Cardinality.EXACTLY_ONE, ""),
+
+                    },
+                    new FunctionReturnSequenceType(STRING, EXACTLY_ONE, "")
+            ),
+    };
 
     public Xid(XQueryContext context, FunctionSignature signature) {
         super(context, signature);
@@ -53,7 +60,9 @@ public class Xid extends BasicFunction {
     
     @Override
     public Sequence eval(Sequence[] args, Sequence contextSequence) throws XPathException {
-        return new StringValue(eXid.get());
+        return new StringValue(
+                args.length == 0 ? eXid.get() : eXid.get(args[0].itemAt(0).getStringValue())
+        );
     }
 
 }

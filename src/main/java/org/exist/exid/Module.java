@@ -37,7 +37,8 @@ public class Module extends AbstractInternalModule {
     private final static String DESCRIPTION = "Randon short id based on eXid";
 
     private final static FunctionDef[] functions = {
-            new FunctionDef(Xid.signature, Xid.class)
+            new FunctionDef(Xid.signature[0], Xid.class),
+            new FunctionDef(Xid.signature[1], Xid.class),
     };
     
     public Module(Map<String, List<? extends Object>> parameters) {

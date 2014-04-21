@@ -52,12 +52,8 @@
     <distributionManagement>
         <repository>
             <id>mvn-repo</id>
-            <url>file:../../mvn-repo/raw/master/releases</url>
+            <url>file:../../mvn-repo/</url>
         </repository>
-        <snapshotRepository>
-            <id>snapshot-mvn-repo</id>
-            <url>file:../../mvn-repo/raw/master/snapshots</url>
-        </snapshotRepository>
     </distributionManagement>
 
 </project>
