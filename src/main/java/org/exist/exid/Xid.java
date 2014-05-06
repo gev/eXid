@@ -34,8 +34,6 @@ import static org.exist.xquery.value.Type.*;
  */
 public class Xid extends BasicFunction {
 
-    private final static Logger logger = Logger.getLogger(Xid.class);
-
     public final static FunctionSignature[] signature = {
             new FunctionSignature(
                     new QName("xid", NAMESPACE_URI, PREFIX),
